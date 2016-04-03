@@ -1,0 +1,26 @@
+php:
+  build: ./php/
+  ports:
+    - "80:80"
+  volumes:
+    - ./www:/var/www/html
+  links:
+    - mariadb:mysql
+  container_name: php
+mariadb:
+  image: mariadb:latest
+  environment:
+    MYSQL_ROOT_PASSWORD: pass
+    MYSQL_DATABASE: docker
+    MYSQL_USER: docker
+    MYSQL_PASSWORD: docker
+  volumes:
+    - ./mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
+  container_name: mariadb
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin:latest
+  container_name: myadmin
+  ports:
+    - "8080:80"
+  links:
+    - mariadb:db
