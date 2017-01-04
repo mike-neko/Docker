@@ -1,0 +1,9 @@
+kitura:
+  build: .
+  ports:
+    - "22222:22"
+    - "8090:8090"
+  volumes:
+    - ./root:/root
+  container_name: kitura
+  tty: true
